@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> </title>
+      <title>闭包 |  </title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -51,204 +51,8 @@
     
       
     <main class="content on">
-      
-<section class="cover">
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover6.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/"></a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
-        startDelay: 0,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 100,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  
-  
-
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
-    }
-
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
-    }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article
-  id="post-闭包之前置知识→作用域与词法作用域"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/"
-    >闭包之前置知识→作用域与词法作用域</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-date">
-  <time datetime="2022-06-15T15:34:13.000Z" itemprop="datePublished">2022-06-15</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这两天刚好和朋友讨论到闭包，这个JavaScript中的“神兽”，很多同学会觉得闭包这玩意太闹心了，怎么着都理解不了…其实刚接触JavaScript的时候我也是这样的。</p>
-<p>但是呢，闭包却非常重要！非常重要！非常重要！ 在《你不知道的JavaScript》中甚至这样写道<strong>“对于那些有一点 JavaScript 使用经验但从未真正理解闭包概念的人来说，理解闭包可以看作是某种意义上的重生”</strong>。</p>
-<p>所以看到这里，各位亲是不是迫切的想要深入的去了解一下闭包了呢？ 不急，不急，对于真正的理解闭包有一个非常重要的前置知识，那就是<strong>作用域与词法作用域</strong>，如果你没能好好理解词法作用域，那么闭包是肯定理解不了的！那么接下来就好好的理解一下词法作用域吧。</p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>我们先抛出一个概念：<strong>“词法作用域是作用域的一种工作模型”</strong>，先不管这句话的深层次的意思，就但看表面，我们就应该可以得出一个结论，那就是没有作用域的概念就没有词法作用域的概念。所以…接下来，你懂的…</p>
-<h2 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h2><p>一言以蔽之，<strong>“作用域就是一套规则，用于确定在何处以及如何查找变量（标识符）的规则”</strong>。在这句话中读到一个关键点 <em>查找变量（标识符）</em>，那么就从查找变量说起吧。</p>
-<p>先看一段及其简单的代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="string">&#x27;iceman&#x27;</span>;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 输出&quot;iceman&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
-
-<p>在foo函数执行的时候，输出一个a变量，那么这个a变量是哪里来的嘞，有看到函数第一行有定义a变量的代码<code>var a = &#39;iceman&#39;</code>。</p>
-<p>再看一段同样简单的代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="string">&#x27;programmer&#x27;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 输出&quot;programmer&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
-
-<p>同样的道理，在输出b的时候，自己函数内部没有找到变量b，那么就在外层的全局中查找，找到了就停止查找并输出了。</p>
-<p>注意以上两段代码都有查找变量，第一段代码是在<strong>函数</strong>中找到a变量，第二段代码是在<strong>全局</strong>中找到b变量。现在闭上眼睛，我要给加粗的这两个词的后面加上几个字了！</p>
-<p>好了，打开眼睛，Duang，Duang —&gt;<strong>函数作用域</strong>、<strong>全局作用域</strong>，把这两个词换入到原来那句话中，第一段代码是在<strong>函数作用域</strong>中找到a变量，第二段代码是在<strong>全局作用域</strong>中找到b变量。</p>
-<p>所以，懂了没有呢？通俗的讲，<strong>作用域就是查找变量的地方</strong>。在某函数中找到该变量，就可以说在该函数作用域中找到了该变量；在全局中找到该变量，就可以说在全局作用域中找到了该变量！</p>
-<p>不知道各位同学有没注意到一个细节，我们在查找b变量的时候，先在函数作用域中查找，没有找到，再去全局作用域中查找，有一个往外层查找的过程。我们好像是顺着一条链条从下往上查找变量，这条链条，我们就称之为<strong>作用域链</strong>。</p>
-<h2 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h2><p>在还没有接触到ES6的let、const之前，只有函数作用域和全局作用域，函数作用域肯定是在全局作用域里面的，而函数作用域中又可以继续嵌套函数作用域，如图：</p>
-<p><img src="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%9B%BE%E7%A4%BA.jpg"></p>
-<p>用代码表示：</p>
-<p><img src="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%9B%BE%E7%A4%BA-%E4%BB%A3%E7%A0%81.jpg"></p>
-<p>以上两张图可以很直观的看出作用域的嵌套关系了吧。查找变量也是顺着红色的箭头走的，从里到外，这从里到外的各层作用域就组成了作用域链。</p>
-<h2 id="作用域中变量（标识符）的查找规则"><a href="#作用域中变量（标识符）的查找规则" class="headerlink" title="作用域中变量（标识符）的查找规则"></a>作用域中变量（标识符）的查找规则</h2><p>首先声明一点，JavaScript是有编译过程的，不要惊讶，真的有！也就是说<code>var name = &#39;iceman&#39;</code>这段代码，其实这是有两个动作的：</p>
-<ul>
-<li>编译器在当前作用域中声明一个变量name</li>
-<li>运行时引擎在作用域中查找该变量，找到了name变量并为其赋值</li>
-</ul>
-<p>证明以上的说法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name); <span class="comment">// 输出undefined</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;iceman&#x27;</span>; </span><br></pre></td></tr></table></figure>
-
-<p>在<code>var name = &#39;iceman&#39;</code>的上一行输出name变量，并没有报错，输出undefined，说明输出的时候该变量已经存在了，只是没有赋值而已。</p>
-<p>其实编译器是这样工作的，在代码执行之前从上到下的进行编译，当遇到某个用var声明的变量的时候，先检查在当前作用域下是否存在了该变量。如果存在，则忽略这个声明；如果不存在，则在当前作用域中声明该变量。</p>
-<p>上面的这段简单的代码包含两种查找类型：输出变量的值的时候的查找类型是RHS，找到变量为其赋值的查找类型是LHS。</p>
-<p>我猜各位同学一定可以猜到“L”和“R”的含义，这里的左侧和右侧指的是在赋值操作的左侧和右侧。也就是说，变量出现在赋值操作的左侧时进行LHS查询，出现在右侧时进行RHS查询。</p>
-<p>用一句通俗的话来讲，RHS就是取到它的源值。</p>
-<p><strong>注意</strong>：“赋值操作的左侧和右侧”，并不意味着只是“=”，实际上赋值操作还有好几种形式。</p>
-<p>在作用域中查找变量都是RHS，并且查找的规则是从当前作用域开始找，如果没找到再到父级作用域中找，一层层往外找，如果在全局作用域如果还没找到的话，就会报错了：<strong>ReferenceError: 某变量 is not defined</strong></p>
-<p>所有的赋值操作中查找变量都是LHS。其中<code>a=4</code>这类赋值操作，也是会从当前作用域中查找，如果没有找到再到外层作用域中找，如果到全局变量啊这个变量，在非严格模式下会创建一个全局变量a。不过，非常不建议这么做，因为轻则污染全局变量，重则造成内存泄漏（比如：a = 一个非常大的数组，a在全局变量中，一直用有引用，程序不会自动将其销毁）。</p>
-<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p>在上面的作用域介绍中，我们将作用域定义为一套规则，这套规则来管理浏览器引擎如何在当前作用域以及嵌套的作用域中根据变量（标识符）进行变量查找。</p>
-<p>我们在前面有抛出一个概念：“词法作用域是作用域的一种工作模型”，作用域有两种工作模型，在JavaScript中的词法作用域是比较主流的一种，另一种动态作用域（比较少的语言在用）。</p>
-<p>所谓的词法作用域就是<strong>在你写代码时将变量和块作用域写在哪里来决定，也就是词法作用域是静态的作用域，在你书写代码时就确定了</strong>。</p>
-<p>请看以下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params">x</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> y = x + <span class="number">4</span>;</span><br><span class="line">	<span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params">z</span>) &#123;</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(x, y, z);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">fn2</span>(y * <span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn1</span>(<span class="number">6</span>); <span class="comment">// 6 10 50</span></span><br></pre></td></tr></table></figure>
-
-<p>这个例子中有个三个嵌套的作用域，如图：</p>
-<p><img src="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/%E5%B5%8C%E5%A5%97%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F.jpg"></p>
-<ul>
-<li>A 为全局作用域，有一个标识符：fn1</li>
-<li>B 为fn1所创建的作用域，有三个标识符：x、y、fn2</li>
-<li>C为fn2所创建的作用域，有一个标识符：z</li>
-</ul>
-<p>作用域是由期代码写在哪里决定的，并且是逐级包含的。</p>
-<p>在此强调，词法作用域就是作用域是由书写代码时函数声明的位置来决定的。编译阶段就能够知道全部标识符在哪里以及是如何声明的，所以词法作用域是静态的作用域，也就是词法作用域能够预测在执行代码的过程中如何查找标识符。</p>
-<p><strong>注1</strong>：eval()和with可以通过其特殊性用来“欺骗”词法作用域，不过正常情况下都不建议使用，会产生性能问题。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
+      <section class="outer">
+  <article
   id="post-闭包"
   class="article article-type-post"
   itemscope
@@ -259,10 +63,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/06/15/%E9%97%AD%E5%8C%85/"
-    >闭包</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  闭包
+</h1>
  
 
       
@@ -271,9 +74,34 @@
     <div class="article-meta">
       <a href="/2022/06/15/%E9%97%AD%E5%8C%85/" class="article-date">
   <time datetime="2022-06-15T15:22:40.000Z" itemprop="datePublished">2022-06-15</time>
-</a>    
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>什么是闭包，你可能会搜出很多答案….</p>
@@ -345,160 +173,90 @@
     
     <footer class="article-footer">
        
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-长沙"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/06/09/%E9%95%BF%E6%B2%99/"
-    >长沙游玩小建议</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/06/09/%E9%95%BF%E6%B2%99/" class="article-date">
-  <time datetime="2022-06-09T08:06:54.000Z" itemprop="datePublished">2022-06-09</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>长沙古老的楚汉名城，屈贾之乡、伟人故里、革命胜地，美食之都、这么多美誉加身，让无数人趋之若鹜！这里是一篇大概的长沙的攻略</p>
-<h2 id="一、交通建议"><a href="#一、交通建议" class="headerlink" title="一、交通建议"></a>一、交通建议</h2><p>1、机场到市区坐磁悬浮换地铁，不要坐机场大巴并不方便。</p>
-<p>2️、提前下载长沙地铁APP，能坐地铁和公交。</p>
-<p>3、高铁站内可以换乘地铁不用二次安检，直接坐2号线到五一广场最方便</p>
-<p>4、不要坐摩的！不要坐黑车！</p>
-<h2 id="二、行程建议"><a href="#二、行程建议" class="headerlink" title="二、行程建议"></a>二、行程建议</h2><h4 id="行程规划"><a href="#行程规划" class="headerlink" title="行程规划"></a>行程规划</h4><p>DAY1：去民宿放下行李→五一广场→坡子街→ ifs →太平老街</p>
-<p>DAY2：岳麓山→橘子洲头→超级文和友</p>
-<p>DAY3：谢子龙影像艺术馆→李自健美术馆→湖南省博物馆→返程</p>
-<h4 id="景点介绍"><a href="#景点介绍" class="headerlink" title="景点介绍"></a>景点介绍</h4><p><strong>五一广场：</strong>处于长沙商业圈的最中心，也是长沙历史最悠久的区域。这里的经济最繁华，配套设施最齐全，一般都会选择住在这里，吃喝玩乐都很方便！</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E4%BA%94%E4%B8%80%E5%B9%BF%E5%9C%BA.jpg"></p>
-<p><strong>IFS国金中心 ：</strong>喜欢拍照的可以去，kaws在7楼，拍照打卡圣地，人比较多，所以一定要早去，才能拍出干净的照片。</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/IFS.jpg"></p>
-<p><strong>坡子街 ：</strong>美食超多，可以在这里解决伙食，这里一般是外地游客最喜欢的地方，当地人一般不推荐，比较适合打卡小吃很多，可以边逛边吃！火宫殿只适合拍照打卡，吃倒是真不好吃，毕竟建筑风格还是好看的！</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%9D%A1%E5%AD%90%E8%A1%97.jpg"></p>
-<p><strong>岳麓山风景名胜区 ：</strong>免费，建议上山的时候坐索道，下山坐滑道，建议根据自己的身体情况选择，景区内有岳麓书院、爱晚亭、麓山寺、云麓宫等著名景点，都值得一逛，最好秋天游玩，可以感受“停车坐爱枫林晚，霜叶红于二月花”。</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%B2%B3%E9%BA%93%E5%B1%B11.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%B2%B3%E9%BA%93%E5%B1%B12.jpg"></p>
-<p>岳麓山建议从南门坐观光车上去，从山顶坐索道或者滑道下山时，东门排队的人会超级多</p>
-<p><strong>橘子洲头 ：</strong>免费，建议坐小火车20，终点站是毛爷爷石像。独立寒秋，湘江北去，橘子洲头。看万山红遍，层林尽染；漫江碧透，百舸争流。我们也可以看看毛爷爷当时看到的风景了，这个秋天不能错过的景点之一！</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%A9%98%E5%AD%90%E6%B4%B2%E5%A4%B41.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%A9%98%E5%AD%90%E6%B4%B2%E5%A4%B42.jpg"></p>
-<p><strong>超级文和友(海信广场店) ：</strong>装修风格很复古，建议只进去拍照，全面复刻了七八十年代的老长沙风格~</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%96%87%E5%92%8C%E5%8F%8B.jpg"></p>
-<p><strong>谢子龙影像艺术馆：</strong>这可能是唯一需要打车才比较方便的景点，著名的拍照圣地，还有个会拍照的保安大哥~比直男男朋友可靠谱多了…  需要提前预约</p>
-<p>预约方法：在“谢子龙艺术馆”—“XPM展览”—选择感兴趣的展馆预约</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E8%B0%A2%E5%AD%90%E9%BE%99%E8%89%BA%E6%9C%AF%E9%A6%86.jpg"></p>
-<p><strong>李自健美术馆：</strong>免费 参观时间 9:30-18:00 可以顺带参观一波，周一闭馆，需要提前预约</p>
-<p>预约方法：在“李自健美术馆”—票务中心-购领票-李子健美术馆 （票比较多，不用担心预约不上）每人最多可预约5个名额。</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%9D%8E%E8%87%AA%E5%81%A5%E7%BE%8E%E6%9C%AF%E9%A6%86.jpg"></p>
-<p><strong>湖南省博物馆 ：</strong>免费，在“湖南省博物馆”上提前3天预约。</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%B9%96%E5%8D%97%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86.jpg"></p>
-<p>链接：<a target="_blank" rel="noopener" href="https://www.hnmuseum.com/zh-hans/content/%E7%BD%91%E4%B8%8A%E5%B1%95%E5%8E%85"></a></p>
-<p>可以来看看镇馆之宝：马王堆汉墓出土的2100年前的西汉女尸，陈列馆里展有薄如蝉翼的素纱单衣、完好无损的印花绵袍、彩绘漆器帛画以及各种木俑和乐器、兵器等。想要了解一座城市最好的方法就是去他的博物馆看看</p>
-<p>门票：免费 需要身份证</p>
-<p>开放时间09:00-17:00；停止入场时间:16:00 周一闭馆！</p>
-<h2 id="三、住宿建议"><a href="#三、住宿建议" class="headerlink" title="三、住宿建议"></a>三、住宿建议</h2><p>基本来长沙的都会选择住五一广场 ，但这边酒店民宿太多啦，酒店靠着江景大多价格不低，民宿太多质量参差不齐，还基本上都是老旧小区，但这家民宿真心好评（一隅泳池设计师民宿）</p>
-<p><strong>无边泳池，270度的落地窗可以观看无敌江景，也能俯瞰半个长沙city，窗外就是IFS，楼下就是海信广场，下楼就可以去文和友打卡</strong></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%B0%91%E5%AE%BF1.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%B0%91%E5%AE%BF2.jpg"></p>
-<p>预订：美团，搜索 一隅泳池设计师民宿 （其他房型没住过，日常差旅来说多少有点小贵了）</p>
-<h2 id="四、本地人建议-干货"><a href="#四、本地人建议-干货" class="headerlink" title="四、本地人建议-干货"></a>四、本地人建议-干货</h2><p>1、疫情期间,出行前记得“湖南省居民健康卡”，领取健康码</p>
-<p>2、出行首选地铁，下载“长沙地铁”，提前充值 20元左右</p>
-<p>3、长沙天气变化大，一定要提前查好天气预报。</p>
-<p>4、长沙共享电车有很多但是要带好头盔，不可以逆行不能载人</p>
-<p>5、住宿首选五一广场，不要为了省几块钱去折腾自己，提前预约好酒店(不是很推荐住民宿，都是照骗)，晚上还可以去逛步行街。</p>
-<p>6、想看夜景可以选择在湘江边上，白天晚上，景色都不错，湘江边有两家民宿还是可以，价格不贵</p>
-<p>7、长沙很好吃，但好玩的地方不多。所以基本上三天就差不多了！</p>
-<p>8、一定要带上学生证岳麓山索道可以半价，橘子洲的小火车也有折扣</p>
-<p>9、在市中心玩的时候一定不要打车，五一广场会非常堵，建议坐地铁或者骑车</p>
-<p>10、一定要穿上舒服点的平底鞋，去橘子洲和岳麓山都要走很远的路爬山时能坐索道小火车一定要坐，累到自己的话后边的行程也玩不好</p>
-<p>11、碰到来搭讪或者来合影的玩偶一定不要理，要么是骗你来消费，要么是索要拍照费</p>
-<p>12、湖南省博物馆一定要去，需要提前一周关注“湖南省博物馆”进行预约，记住周一闭馆哦</p>
-<p>13、杜甫江阁就在湘江边上，是看烟花的最佳观景台之一，个人觉得没必要上去，因为现在没有烟花</p>
-<p>14、李自健和谢子龙这两个景点在一起，但是比较偏没有地铁可以直达，可以坐公交</p>
-<p>15、冬瓜山、四方坪夜市都是本地人聚集的夜市，看旅游路线离哪里比较方便，建议去吃一下的</p>
-<p>16、长沙的菜真的很辣，不能吃辣的一定要提前和老板说</p>
-<p>17、千万别买路边的水果捞，按克收费的，随便一称就是上百</p>
-<p>18、长沙景点还是比较集中的,要提前做好规划不然来回跑太赶</p>
-<h2 id="五、美食建议"><a href="#五、美食建议" class="headerlink" title="五、美食建议"></a>五、美食建议</h2><p><strong>益华家菜屋（黄鸭叫荷包蛋，凉拌空心菜）</strong></p>
-<p>地址：世贸三楼，五一广场导航走路大概十分钟</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%BB%84%E9%B8%AD%E5%8F%AB%E8%8D%B7%E5%8C%85%E8%9B%8B.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E7%9A%AE%E8%9B%8B%E8%80%81%E5%B9%B2%E5%A6%88%E6%8E%92%E9%AA%A8.jpg"></p>
-<p><strong>四方坪三十栋（大刀牛肉，酸萝卜牛肚丝，凉拌扎蹄）</strong></p>
-<p>地址：开福区四方坪商贸城A30栋101号</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%A4%A7%E5%88%80%E7%89%9B%E8%82%89.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%85%B8%E8%90%9D%E5%8D%9C%E7%89%9B%E8%82%9A%E4%B8%9D.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%87%89%E6%8B%8C%E6%89%8E%E8%B9%84.jpg"></p>
-<p><strong>光脑壳家常菜馆（基围虾，酸萝卜炒牛百叶，凉拌鸡爪）</strong></p>
-<p>地址：开福区春风街与轩辕殿巷交叉口东北50米</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%9F%BA%E5%9B%B4%E8%99%BE.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%85%B8%E8%90%9D%E5%8D%9C%E7%82%92%E7%89%9B%E7%99%BE%E5%8F%B6.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%87%89%E6%8B%8C%E9%B8%A1%E7%88%AA.jpg"></p>
-<p><strong>高记食堂（醉鸡，香芋丝）</strong></p>
-<p>地址：晚报大道(龙柏路口)</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%86%89%E9%B8%A1.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E8%B4%B5%E5%A6%83%E9%A6%99%E8%8A%8B%E4%B8%9D.jpg"></p>
-<p><strong>曾娭毑酒楼（桑拿腰花，平锅牛肉）</strong></p>
-<p>地址：天心区新开铺路与竹塘西路交汇口</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%B9%B3%E9%94%85%E7%89%9B%E8%82%89.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E6%A1%91%E6%8B%BF%E8%85%B0%E8%8A%B1.jpg"></p>
-<p><strong>辉胖子（牛腩炖芋头，醋炒蛋）</strong></p>
-<p>地址：芙蓉区定王台路16号</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E7%89%9B%E8%85%A9%E7%82%96%E8%8A%8B%E5%A4%B4.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%86%8B%E7%82%92%E8%9B%8B.jpg"></p>
-<p><strong>烂屋子（粉蒸肉，香菜拌腰花，清炖牛腩）</strong></p>
-<p>地址：开福区毛家桥街221号</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E7%B2%89%E8%92%B8%E8%82%89.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E9%A6%99%E8%8F%9C%E6%8B%8C%E8%85%B0%E8%8A%B1.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E7%B1%B3%E8%B1%86%E8%85%90.jpg"></p>
-<p><strong>昱龙大盆牛蛙馆（大盆牛蛙）</strong></p>
-<p>地址：天心区解放西路三兴街39号</p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%A4%A7%E7%9B%86%E7%89%9B%E8%9B%99.jpg"></p>
-<p><img src="/2022/06/09/%E9%95%BF%E6%B2%99/%E5%8F%A3%E5%91%B3%E8%99%BE.jpg"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-  </article>
-  
-
-  
-</section>
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
 </div>
 
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/15/%E9%97%AD%E5%8C%85/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/15/%E9%97%AD%E5%8C%85%E4%B9%8B%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E2%86%92%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            闭包之前置知识→作用域与词法作用域
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/06/09/%E9%95%BF%E6%B2%99/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">长沙游玩小建议</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -644,6 +402,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link
